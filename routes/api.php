@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductControllerResourceApi;
+use App\Http\Controllers\CategoriesControllerResource;
 use App\Http\Controllers\LoginControllerInvokable;
 use App\Enums\OrderEnum;
 use App\Models\User;
@@ -26,4 +27,5 @@ Route::group(['prefix'=>'/auth'],function(){
 });
 Route::resources([
     'products'=>ProductControllerResourceApi::class,
+    'categories'=>CategoriesControllerResource::class
 ]);
