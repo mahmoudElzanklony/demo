@@ -15,6 +15,8 @@ use Illuminate\Pipeline\Pipeline;
 class ProductControllerResourceApi extends Controller
 {
     use DefaultControllerResourceFunctionsTrait;
+
+    private $form_request = ProductFormRequest::class;
     public function __construct(private ProductInterface $repository)
     {
         $this->middleware('auth:sanctum')->except(['index', 'show']);

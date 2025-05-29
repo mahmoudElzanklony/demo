@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 use App\Events\OrderEvent;
+use App\Listeners\CheckPaymentListener;
+use App\Listeners\CheckProductQuantityListener;
 use App\Listeners\PaymentListener;
+use App\Listeners\SaveOrderListener;
+use App\Listeners\ShipmentListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,12 +21,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        OrderEvent::class=>[
-          PaymentListener::class
-        ],
-        Registered::class => [
-            SendEmailVerificationNotification::class,
-        ],
+        OrderEvent::class => [
+            CheckProductQuantityListener::class,
+            CheckPaymentListener::class,
+            SaveOrderListener::class,
+            ShipmentListener::class,
+        ]
     ];
 
     /**

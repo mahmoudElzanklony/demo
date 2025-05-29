@@ -2,13 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\OrderEvent;
-use App\Models\User;
-use App\Notifications\TestNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class PaymentListener
+class SaveOrderListener
 {
     /**
      * Create the event listener.
@@ -21,11 +18,9 @@ class PaymentListener
     /**
      * Handle the event.
      */
-    public function handle(OrderEvent $event): void
+    public function handle(object $event): void
     {
-        //
+        dump('third listener');
 
-        $user = User::query()->first();
-        $user->notify(new TestNotification('aaaaaaaaaaaaaaaaaaa hhh'));
     }
 }

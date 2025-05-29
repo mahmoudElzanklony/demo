@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\contracts\CategoriesInterface;
+use App\contracts\OrderInterface;
 use App\contracts\ProductInterface;
 use App\Facades\PaymentManagerFacade;
 use App\Http\Patterns\Repositories\CategoriesRepository;
 use App\Http\Patterns\Repositories\CategoriesRepositoryV2;
+use App\Http\Patterns\Repositories\OrderRepository;
 use App\Http\Patterns\Repositories\ProductRepository;
 use App\Services\CacheService;
 use App\Services\PaymentManagerService;
@@ -27,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $this->app->bind(ProductInterface::class, ProductRepository::class);
+        $this->app->bind(OrderInterface::class, OrderRepository::class);
 
         $this->app->singleton('PaymentManager', function ($app) {
            $obj = new PaymentManagerService($app);

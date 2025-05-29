@@ -17,7 +17,14 @@ class OrderEvent
     /**
      * Create a new event instance.
      */
-    public function __construct(public $data){}
+
+    public function __construct(public $order){}
+
+
+    public function handle()
+    {
+
+    }
 
     /**
      * Get the channels the event should broadcast on.
