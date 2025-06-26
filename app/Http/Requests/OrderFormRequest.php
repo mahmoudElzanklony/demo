@@ -24,7 +24,7 @@ class OrderFormRequest extends FormRequest
         return [
             'data'=>'required|array',
             'data.*.product_id'=>'required|exists:products,id',
-            'data.*.quantity'=>'required|numeric|min:1',
+            'data.*.quantity'=>'required|numeric',
         ];
     }
 }

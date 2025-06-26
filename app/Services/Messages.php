@@ -11,6 +11,6 @@ class Messages
 
     public static function error($message = '',$code = 401)
     {
-        return response()->json(['message'=>$message],$code);
+        return response()->json(['errors'=>$message],$code);
     }
 }
