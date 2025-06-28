@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\contracts\MoneyInterface;
 use App\contracts\OrderInterface;
 use App\Http\Requests\OrderFormRequest;
 use Illuminate\Http\Request;

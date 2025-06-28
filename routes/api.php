@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductControllerResourceApi;
 use App\Http\Controllers\CategoriesControllerResource;
 use App\Http\Controllers\OrdersControllerResource;
 use App\Http\Controllers\LoginControllerInvokable;
+use App\Http\Controllers\CheckoutControllerInvokable;
 use App\Enums\OrderEnum;
 use App\Models\User;
 /*
@@ -25,6 +26,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix'=>'/auth'],function(){
     Route::post('/login',LoginControllerInvokable::class);
+});
+Route::group(['prefix'=>'/checkout'],function(){
+    Route::post('/',CheckoutControllerInvokable::class);
 });
 Route::resources([
     'products'=>ProductControllerResourceApi::class,

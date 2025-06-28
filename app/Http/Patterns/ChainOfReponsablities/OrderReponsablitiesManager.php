@@ -9,6 +9,9 @@ class OrderReponsablitiesManager
     {
         $this->next = $next;
     }
+    public function getNext(){
+        return $this->next;
+    }
     public function handle($data)
     {
         if($this->next){

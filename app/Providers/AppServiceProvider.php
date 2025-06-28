@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\contracts\CategoriesInterface;
+use App\contracts\MoneyInterface;
 use App\contracts\OrderInterface;
+use App\contracts\PaymentInterface;
 use App\contracts\ProductInterface;
 use App\Facades\PaymentManagerFacade;
 use App\Http\Patterns\Repositories\CategoriesRepository;
@@ -11,8 +13,10 @@ use App\Http\Patterns\Repositories\CategoriesRepositoryV2;
 use App\Http\Patterns\Repositories\OrderRepository;
 use App\Http\Patterns\Repositories\ProductRepository;
 use App\Services\CacheService;
+use App\Services\Money\BankService;
+use App\Services\Money\PaypalService;
+use App\Services\Money\WalletService;
 use App\Services\PaymentManagerService;
-use App\Services\PaypalService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,11 +35,32 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);
 
+        $this->app->bind(MoneyInterface::class, function (){
+            $payment = request('payment');
+            return match ($payment) {
+                'paypal' => new PaypalService(),
+                'wallet' => new WalletService(),
+                default => new BankService(),
+            };
+        });
+
         $this->app->singleton('PaymentManager', function ($app) {
            $obj = new PaymentManagerService($app);
            $obj->registerPayment('paypal', new PaypalService());
            $obj->registerPayment('cache', new CacheService());
            return $obj;
+        });
+
+
+        $this->app->bind(PaymentInterface::class, function (){
+            $payment = request('payment');
+/*
+            return match ($payment) {
+                'paypal' => new \App\Services\Payment\PaypalService(),
+                'wallet' => new \App\Services\Payment\WalletService(),
+                'bank'=> new \App\Services\Payment\BankService()
+            };*/
+            return app('\App\Services\Payment\\'.ucfirst($payment).'Service');
         });
     }
 

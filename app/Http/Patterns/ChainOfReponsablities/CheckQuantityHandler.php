@@ -8,6 +8,7 @@ class CheckQuantityHandler extends OrderReponsablitiesManager
 {
     public function handle($data)
     {
+       dd($this->next,parent::getNext());
        $err = 0;
        foreach ($data['data'] as $item) {
            if($item['quantity'] == 0){
