@@ -8,6 +8,7 @@ use App\contracts\OrderInterface;
 use App\contracts\PaymentInterface;
 use App\contracts\ProductInterface;
 use App\Facades\PaymentManagerFacade;
+use App\Http\Patterns\Factory\PaymentFactory;
 use App\Http\Patterns\Repositories\CategoriesRepository;
 use App\Http\Patterns\Repositories\CategoriesRepositoryV2;
 use App\Http\Patterns\Repositories\OrderRepository;
@@ -54,13 +55,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(PaymentInterface::class, function (){
             $payment = request('payment');
-/*
-            return match ($payment) {
-                'paypal' => new \App\Services\Payment\PaypalService(),
-                'wallet' => new \App\Services\Payment\WalletService(),
-                'bank'=> new \App\Services\Payment\BankService()
-            };*/
-            return app('\App\Services\Payment\\'.ucfirst($payment).'Service');
+            $paymentFactory = new PaymentFactory();
+            return $paymentFactory->getPayment($payment);
+            //return app('\App\Services\Payment\\'.ucfirst($payment).'Service');
         });
     }
 
