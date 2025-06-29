@@ -5,6 +5,7 @@ namespace App\Http\Patterns\Repositories;
 use App\contracts\ProductInterface;
 use App\Http\Filters\DescriptionFilter;
 use App\Http\Filters\NameFilter;
+use App\Http\Patterns\Builders\ProductBuilder;
 use App\Http\Requests\ProductFormRequest;
 use App\Models\products;
 use App\Services\Messages;
@@ -27,8 +28,9 @@ class ProductRepository implements ProductInterface
      */
     public function create($data)
     {
-        dd($data);
-        return products::query()->create($data);
+        $builder = new ProductBuilder($data);
+
+        return $builder->init_product()->save_properties()->save_wholesale();
     }
 
     /**
@@ -45,6 +47,8 @@ class ProductRepository implements ProductInterface
     public function update($data, $id)
     {
         $data['id'] = $id;
-        return products::query()->where('id',$id)->findOrFailWithErr('Product Not Found')->update($data);
+        $builder = new ProductBuilder($data);
+        return $builder->init_product()->save_properties()->save_wholesale();
+       // return products::query()->where('id',$id)->findOrFailWithErr('Product Not Found')->update($data);
     }
 }
