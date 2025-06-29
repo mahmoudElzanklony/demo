@@ -27,11 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if(request()->filled('type') && request()->type == 'normal'){
+        /*if(request()->filled('type') && request()->type == 'normal'){
             $this->app->bind(CategoriesInterface::class, CategoriesRepositoryV2::class);
         }else {
             $this->app->bind(CategoriesInterface::class, CategoriesRepository::class);
-        }
+        }*/
+        $this->app->bind(CategoriesInterface::class, CategoriesRepository::class);
 
         $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);

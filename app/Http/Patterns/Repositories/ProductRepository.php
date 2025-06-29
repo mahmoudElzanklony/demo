@@ -27,6 +27,7 @@ class ProductRepository implements ProductInterface
      */
     public function create($data)
     {
+        dd($data);
         return products::query()->create($data);
     }
 

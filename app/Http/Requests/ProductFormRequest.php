@@ -25,6 +25,12 @@ class ProductFormRequest extends FormRequest
             'name' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
+            'properties'=>'required|array',
+            'properties.*.name' => 'required|string',
+            'properties.*.answer' => 'required|string',
+            'wholesale'=>'required|array',
+            'wholesale.*.quantity' => 'required|integer|min:1',
+            'wholesale.*.price' => 'required|integer|min:1',
         ];
     }
 }

@@ -19,7 +19,7 @@ class LoginControllerInvokable extends Controller
             $user->token  = $user->createToken($data['email'])->plainTextToken;
             return $user;
         }else{
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'email or password is not correct'], 401);
         }
 
     }
