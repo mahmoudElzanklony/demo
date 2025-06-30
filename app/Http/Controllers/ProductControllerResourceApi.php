@@ -24,4 +24,7 @@ class ProductControllerResourceApi extends Controller
 
 
 
+
+
+
 }

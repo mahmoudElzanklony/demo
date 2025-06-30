@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoriesControllerResource;
 use App\Http\Controllers\OrdersControllerResource;
 use App\Http\Controllers\LoginControllerInvokable;
 use App\Http\Controllers\CheckoutControllerInvokable;
+use App\Http\Controllers\AppointmentsControllerResourceApi;
 use App\Enums\OrderEnum;
 use App\Models\User;
 /*
@@ -30,8 +31,12 @@ Route::group(['prefix'=>'/auth'],function(){
 Route::group(['prefix'=>'/checkout'],function(){
     Route::post('/',CheckoutControllerInvokable::class);
 });
+
+Route::get('/get-info',[AppointmentsControllerResourceApi::class,'get_info']);
+
 Route::resources([
     'products'=>ProductControllerResourceApi::class,
     'categories'=>CategoriesControllerResource::class,
     'orders'=>OrdersControllerResource::class,
+    'appointments'=>AppointmentsControllerResourceApi::class
 ]);

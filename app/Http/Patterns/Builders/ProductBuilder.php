@@ -34,7 +34,7 @@ class ProductBuilder
     public function save_properties()
     {
         foreach ($this->data['properties'] as $property) {
-            product_properties::query()->updateOsssrCreate([
+            product_properties::query()->updateOrCreate([
                 'id'=>$property['id'] ?? null,
             ],[
                 'product_id'=>$this->product->id,

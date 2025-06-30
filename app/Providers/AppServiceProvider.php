@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\contracts\AppointmentInterface;
 use App\contracts\CategoriesInterface;
 use App\contracts\MoneyInterface;
 use App\contracts\OrderInterface;
@@ -9,6 +10,7 @@ use App\contracts\PaymentInterface;
 use App\contracts\ProductInterface;
 use App\Facades\PaymentManagerFacade;
 use App\Http\Patterns\Factory\PaymentFactory;
+use App\Http\Patterns\Repositories\AppointmentRepository;
 use App\Http\Patterns\Repositories\CategoriesRepository;
 use App\Http\Patterns\Repositories\CategoriesRepositoryV2;
 use App\Http\Patterns\Repositories\OrderRepository;
@@ -36,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(OrderInterface::class, OrderRepository::class);
+
+        $this->app->bind(AppointmentInterface::class,AppointmentRepository::class);
 
         $this->app->bind(MoneyInterface::class, function (){
             $payment = request('payment');
