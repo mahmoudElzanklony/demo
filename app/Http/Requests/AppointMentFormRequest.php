@@ -26,12 +26,7 @@ class AppointMentFormRequest extends FormRequest
             'room_type'=>'required|string',
             'transfer_type'=>'required',
             'date'=>'required',
-            'doctors_no'=>'required|integer',
-            'nurseries_no'=>'required|integer',
-            'type'=>'required',
-            'tax'=>'required|min:0',
-            'discount'=>'required|integer',
-            'money'=>'required'
+            'payment_type'=>'required',
         ];
     }
 }

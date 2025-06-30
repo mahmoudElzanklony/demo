@@ -3,6 +3,8 @@
 namespace App\Http\Patterns\Repositories;
 
 use App\contracts\AppointmentInterface;
+use App\Http\Patterns\Builders\AppointmentBuilder;
+use App\Models\appointments;
 
 class AppointmentRepository implements AppointmentInterface
 {
@@ -14,7 +16,9 @@ class AppointmentRepository implements AppointmentInterface
 
     public function create(array $data)
     {
-        // TODO: Implement create() method.
+        $builder = new AppointmentBuilder($data);
+        $builder->make_basic_appointment()->detect_room()->save_details()->save_payment();
+        return $builder->appointment;
     }
 
     public function update($data, $id)
