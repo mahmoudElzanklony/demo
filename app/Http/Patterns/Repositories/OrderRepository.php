@@ -7,6 +7,9 @@ use App\Events\OrderEvent;
 use App\Http\Patterns\ChainOfReponsablities\CheckPaymentHandler;
 use App\Http\Patterns\ChainOfReponsablities\CheckQuantityHandler;
 use App\Http\Patterns\ChainOfReponsablities\VerifyShipmentHandler;
+use App\Models\orders;
+use App\Models\products;
+use Illuminate\Support\Facades\Auth;
 
 class OrderRepository implements OrderInterface
 {
@@ -25,7 +28,11 @@ class OrderRepository implements OrderInterface
         $checkQuantity->setNext($checkShipment);
         $checkShipment->setNext($checkPayment);
         $checkQuantity->handle($data); // execute first handler
-
+        $order = orders::query()->create([
+            'user_id' => Auth::id(),
+            'product_id'=>products::query()->first()->id
+        ]);
+        return $order;
 
     }
 

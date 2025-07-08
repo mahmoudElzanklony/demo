@@ -12,8 +12,8 @@ class CheckPaymentHandler extends OrderReponsablitiesManager
     public function handle($data)
     {
         app(PaymentInterface::class)->pay($data);
-        dump('Checking payment handler...');
-        abort(Messages::error('payment money not enough'));
+       // dump('Checking payment handler...');
+       // abort(Messages::error('payment money not enough'));
         //parent::handle($data);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\contracts\MoneyInterface;
 use App\contracts\OrderInterface;
 use App\Http\Requests\OrderFormRequest;
+use App\Services\Messages;
 use Illuminate\Http\Request;
 
 class OrdersControllerResource extends Controller
@@ -26,7 +27,7 @@ class OrdersControllerResource extends Controller
      */
     public function store(OrderFormRequest $request)
     {
-        return $this->repository->create($request->validated());
+        return Messages::success('Order done successfully',$this->repository->create($request->validated()));
     }
 
     /**

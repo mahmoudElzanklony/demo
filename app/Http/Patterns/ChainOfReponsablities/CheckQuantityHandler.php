@@ -13,7 +13,6 @@ class CheckQuantityHandler extends OrderReponsablitiesManager
                abort(Messages::error('quantity is empty'));
            }
        }
-       dump('Check quantity handler');
        parent::handle($data);
     }
 

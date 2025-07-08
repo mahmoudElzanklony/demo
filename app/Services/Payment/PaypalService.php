@@ -9,7 +9,7 @@ class PaypalService implements PaymentInterface
 
     public function pay($data)
     {
-        dd('paypal service executed');
+        //dd('paypal service executed');
         return 'paypal';
     }
 }

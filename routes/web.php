@@ -13,16 +13,21 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/test-lock', function () {
+    \Illuminate\Support\Facades\Cache::lock('laravel_lock', 15);
+    return 'Lock acquired';
+});
 
-    $query = \App\Models\User::query();
+Route::get('/', function () {
+    phpinfo();
+    /*$query = \App\Models\User::query();
     $first = $query->clone()->whereNull('email_verified_at')->get();
     $second = $query->clone()->where('email','LIKE','%example.net%')->get();
     return $second;
     foreach ($data as $user){
         echo $user->name.'  and posts count ==>'.$user->posts_count .'<br>';
     }
-    return view('welcome');
+    return view('welcome');*/
 });
 
 Route::controller(\App\Http\Controllers\HomeController::class)->group(function (){

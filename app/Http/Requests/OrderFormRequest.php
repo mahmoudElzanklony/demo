@@ -25,6 +25,7 @@ class OrderFormRequest extends FormRequest
             'data'=>'required|array',
             'data.*.product_id'=>'required|exists:products,id',
             'data.*.quantity'=>'required|numeric',
+            'payment'=>'required',
         ];
     }
 }
