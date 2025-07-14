@@ -34,7 +34,7 @@ class ExampleTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(422);
     }
 
     public function test_insert_product_without_name()

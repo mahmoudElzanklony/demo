@@ -48,7 +48,7 @@ jobs:
        - name: Deploy via ssh
          run: |
             ssh -i id_rsa -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-              cd ${{ secrets.SSH_DIR }}
+              cd ${{ secrets.DEPLOY_DIR }}
               git pull origin main
               composer install
               php artisan migrate
