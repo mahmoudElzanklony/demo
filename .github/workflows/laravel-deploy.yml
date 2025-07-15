@@ -44,8 +44,6 @@ jobs:
          run: |
             echo "${{  secrets.SSH_KEY  }}" > id_rsa
             chmod 600 id_rsa
-         env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
 
        - name: Deploy via ssh
          run: |
