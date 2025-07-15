@@ -44,10 +44,12 @@ jobs:
          run: |
             echo "${{  secrets.SSH_KEY  }}" > id_rsa
             chmod 600 id_rsa
+         env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
 
        - name: Deploy via ssh
          run: |
-            ssh -i id_rsa -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} mahmoud@206.189.187.210 << 'EOF'
+            ssh -vvv -i id_rsa -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} mahmoud@206.189.187.210 << 'EOF'
               cd ${{ secrets.DEPLOY_DIR }}
               git pull origin main
               composer install
