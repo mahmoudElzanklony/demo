@@ -49,7 +49,7 @@ jobs:
 
        - name: Deploy via ssh
          run: |
-            ssh -vvv -i id_rsa -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} mahmoud@206.189.187.210 << 'EOF'
+            ssh -vvv -i id_rsa -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
               cd ${{ secrets.DEPLOY_DIR }}
               git pull origin main
               composer install
