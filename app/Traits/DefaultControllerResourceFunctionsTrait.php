@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+
+
 use App\Http\Requests\CategoriesFormRequest;
 use App\Services\Messages;
 use Illuminate\Http\Request;
