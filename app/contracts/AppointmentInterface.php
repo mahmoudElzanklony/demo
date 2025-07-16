@@ -2,6 +2,7 @@
 
 namespace App\contracts;
 
+
 interface AppointmentInterface
 {
     public function index();
